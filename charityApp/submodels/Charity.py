@@ -29,7 +29,7 @@ class CharityLocation(models.Model):
     latitude    = models.CharField(max_length=120)
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now=True)
-    charity_id  = models.ForeignKey(Charity, related_name='charitiy_location', on_delete=models.CASCADE) 
+    charity = models.OneToOneField("Charity", on_delete=models.CASCADE)
 
     def __repr__(self):
         return f'<Charity Location: ID:{self.id} Longitude:{self.longitude} Latitude:{self.latitud} Charity ID:{self.charity_id}>'

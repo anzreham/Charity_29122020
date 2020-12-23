@@ -24,7 +24,4 @@ class UserAddress(models.Model):
     # I'm not sure should be one to one or foriegn 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    user_id    = models.ForeignKey(User, related_name="user_address", on_delete = models.CASCADE)
- 
-
-
+    user_id    = models.OneToOneField("User", on_delete=models.CASCADE)

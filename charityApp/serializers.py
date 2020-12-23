@@ -28,7 +28,7 @@ class CharitySerializer(serializers.ModelSerializer):
 class CharityLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = CharityLocation
-        fields = ['id', 'longitude','latitude','created_at','updated_at','charity_id']
+        fields = ['id', 'longitude','latitude','created_at','updated_at','charity']
 
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
