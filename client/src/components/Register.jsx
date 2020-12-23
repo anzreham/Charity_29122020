@@ -19,7 +19,7 @@ const Register = () => {
         <div className="container register">
             <div className="row">
                 <div className="col-md-3 register-left">
-                    <img src={`${HomeLogo}`} alt=""/>
+                    <img src={`${HomeLogo}`} alt="logo"/>
                     <h3>Welcome</h3>
                     <p>Thank you for joining us </p>
                 </div>
@@ -34,7 +34,7 @@ const Register = () => {
                     </ul>
                     <div>
                         {currentUserState==true?<UserRegister/>:<CharityRegister/>}
-                        <p className="have-account">Already have an account? <span>Sign in</span></p>
+                        <p className="have-account">Already have an account? <Link to="/login"><span>Sign in</span></Link></p>
                     </div>
                 </div>
             </div>
