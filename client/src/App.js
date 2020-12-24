@@ -13,9 +13,9 @@ function App() {
 			<Link to="/login">Login </Link>
 			<Link to="/user-dashboard">User Page </Link>
 			<Router>
-				<Register path="/register/" />
+				<Register path="/register/"/>
 				<Login path="/login/" />
-				<UserPage path="/user-dashboard/" />
+				<UserPage path="/user-dashboard"/>
 			</Router>
 		</div>
 	);

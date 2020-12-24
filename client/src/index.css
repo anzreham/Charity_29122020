@@ -8,7 +8,9 @@ body {
 	background-color: #ecf5f0;
 	font-family: 'Century Gothic', Calibri, Arial;
 }
-
+.h-100 {
+	height: 100% !important;
+}
 /* ----------------------------Registration---------------------------- */
 
 .register {
@@ -111,4 +113,79 @@ input[type="submit"]::-moz-focus-inner {
 	color: #22b481;
 	cursor: pointer;
 }
-/* ---------------------------- ---------------------------- */
+/* ----------------------------User Dashboard---------------------------- */
+.user-body {
+	padding: 15px;
+}
+.card-user-body {
+	flex: 1 1 auto;
+	min-height: 1px;
+	padding: 1rem;
+}
+.breadcrumb {
+	background-image: linear-gradient(120deg, #14815b 0%, #93f9b9 100%);
+	-webkit-box-shadow: 1px 2px 10px 5px rgba(12, 61, 43, 0.26);
+	box-shadow: 1px 2px 10px 5px rgba(12, 61, 43, 0.26);
+}
+.breadcrumb li {
+	color: var(--light-white-color);
+}
+.link-user-breadcrumb {
+	color: var(--light-white-color);
+}
+.link-user-breadcrumb:hover {
+	color: var(--light-green-color);
+	text-decoration: none;
+}
+.link-user-breadcrumb::selection {
+	color: var(--light-green-color);
+}
+.card-shadow {
+	-webkit-box-shadow: 1px 2px 10px 5px rgba(12, 61, 43, 0.26);
+	box-shadow: 1px 2px 10px 5px rgba(12, 61, 43, 0.26);
+}
+.user-page-font {
+	color: var(--primary-color);
+}
+.user-page-line {
+	border-bottom: 1px solid var(--primary-color);
+}
+.btn-edit-user {
+	float: right;
+	margin-top: 5%;
+	border: none;
+	border-radius: 0.8rem;
+	padding: 1.4%;
+	background: var(--primary-color);
+	color: var(--light-white-color);
+	font-weight: 600;
+	width: 20%;
+	cursor: pointer;
+}
+.cancelattend {
+	color: rgba(180, 64, 64, 0.767);
+}
+.cancelattend:hover {
+	color: rgb(173, 42, 42);
+	text-decoration: none;
+}
+.card-user-head {
+	background-image: linear-gradient(120deg, #14815b 0%, #93f9b9 100%);
+	color: var(--light-white-color);
+}
+.table-th {
+	color: var(--primary-color);
+}
+.gutters-sm {
+	margin-right: -8px;
+	margin-left: -8px;
+}
+.gutters-sm > .col,
+.gutters-sm > [class*=col-] {
+	padding-right: 8px;
+	padding-left: 8px;
+}
+.mb-3,
+.my-3 {
+	margin-bottom: 1rem !important;
+}
