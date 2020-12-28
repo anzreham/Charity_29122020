@@ -39,11 +39,11 @@ urlpatterns = [
     path(r'api/charities',user_views.CharityViewSet.as_view()),  
     path(r'api/news',views.NewsViewSet.as_view()),
     path(r'api/news/<int:news_id>/',views.NewsDetails.as_view()),
+    path(r'api/activites',views.ActivityViewSet.as_view()),
+    path(r'api/activites/<int:activity_id>/',views.ActivityDetails.as_view()),
     path(r'api/sessions', user_views.UserSessions.as_view()),
     path(r'api/client/<int:client_id>/', user_views.ClientDetails.as_view()),
     path(r'api/charity/<int:charity_id>/', user_views.CharityDetails.as_view()),
     path(r'api/client/<int:client_id>/location/', views.UserAddressViewSet.as_view()),
     path(r'api/charity/<int:charity_id>/location/', views.CharityLocationViewSet.as_view()),
-    # path(r'api/charity/<int:charity_id>/news/<int:news_id>', views.CharityLocationViewSet.as_view())
-
 ]

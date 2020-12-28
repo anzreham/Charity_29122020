@@ -102,9 +102,39 @@ class CharityLocationViewSet(APIView):
         except Exception as error:
             return Response({"errors": str(error)})
 
-class ActivityViewSet(viewsets.ModelViewSet):
+class ActivityViewSet(APIView):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
+
+    def get(self, request, format=None):
+        activities = Activity.objects.all()
+        serializer = ActivitySerializer(activities, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        try:
+            check=User.objects.get(id=request.user.id)
+            if check.is_charity:
+                serializer = ActivitySerializer(data=request.data,context={'request': request})
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                return Response(serializer.errors)
+            return Response({"errors": "Not allowed"})
+        except Exception as error:
+            return Response({"errors": str(error)})
+
+class ActivityDetails(APIView):
+    queryset = Activity.objects.all()
+    serializer_class = ActivitySerializer
+
+    def get(self, request, activity_id, format=None):
+        try:
+            activiy=Activity.objects.get(id=activity_id)
+            serializer = ActivitySerializer(activiy)
+            return Response(serializer.data)
+        except Exception as error:
+            return Response({"errors": str(error)})     
 
 class BookAppointmentViewSet(viewsets.ModelViewSet):
     queryset = BookAppointment.objects.all()
@@ -113,4 +143,3 @@ class BookAppointmentViewSet(viewsets.ModelViewSet):
 class VolunteeringViewSet(viewsets.ModelViewSet):
     queryset = Volunteering.objects.all()
     serializer_class = VolunteeringSerializer
-

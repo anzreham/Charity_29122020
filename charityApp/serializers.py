@@ -61,9 +61,18 @@ class NewsSerializer(serializers.ModelSerializer):
         return news
 
 class ActivitySerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Activity
-        fields = ['id', 'name','description','date','created_at','updated_at','charity_id']  
+        fields = ['id', 'name','description','date','created_at','updated_at','user']  
+    def create(self, validated_data):
+        user = validated_data['user']
+        user.save()
+        name=validated_data['name']
+        description=validated_data['description']
+        date=validated_data['date']
+        activity = Activity.objects.create(name=name,description=description,date=date,user=user) 
+        return activity
           
 class  BookAppointmentSerializer(serializers.ModelSerializer):
     class Meta:
