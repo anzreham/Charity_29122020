@@ -19,3 +19,6 @@ class Volunteering(models.Model):
     activity    = models.ForeignKey(Activity, related_name="activity_volunteer", on_delete = models.CASCADE)
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'<Volunteer: ID:{self.id} User ID:{self.user} Activity:{self.activity.name}>'

@@ -42,6 +42,7 @@ urlpatterns = [
     path(r'api/news/<int:news_id>/',views.NewsDetails.as_view()),
     path(r'api/activites',views.ActivityViewSet.as_view()),
     path(r'api/activites/<int:activity_id>/',views.ActivityDetails.as_view()),
+    path(r'api/volunteers',views.VolunteeringViewSet.as_view()),
     path(r'api/sessions', user_views.UserSessions.as_view()),
     path(r'api/client/<int:client_id>/', user_views.ClientDetails.as_view()),
     path(r'api/charity/<int:charity_id>/', user_views.CharityDetails.as_view()),

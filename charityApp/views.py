@@ -131,10 +131,55 @@ class ActivityDetails(APIView):
         except Exception as error:
             return Response({"errors": str(error)})     
 
+class VolunteeringViewSet(APIView):
+    queryset = Volunteering.objects.all()
+    serializer_class = VolunteeringSerializer
+
+    def get(self, request, format=None):
+        volunteers = Volunteering.objects.all()
+        serializer = VolunteeringSerializer(volunteers, many=True)
+        return Response(serializer.data)
+
+    def post(self, request,format=None):
+        try:
+            check=User.objects.get(id=request.user.id)
+            if check.is_client:
+                serializer = VolunteeringSerializer(data=request.data,context={'request': request})
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                return Response(serializer.errors)
+            return Response({"errors": "Not allowed"})
+        except Exception as error:
+            return Response({"errors": str(error)})
+
 class BookAppointmentViewSet(viewsets.ModelViewSet):
     queryset = BookAppointment.objects.all()
     serializer_class = BookAppointmentSerializer
+    # def post(self, request, format=None):
+    #     serializer = CharityProfileSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors)
 
-class VolunteeringViewSet(viewsets.ModelViewSet):
-    queryset = Volunteering.objects.all()
-    serializer_class = VolunteeringSerializer
+    # def get(self, request,format=None):
+    #     try:
+    #         charity=CharityLocation.objects.get(user_id=charity_id)
+    #         current = request.user.id
+    #         if current != charity.user_id:
+    #             return Response({"errors": "You are not authorized to view this page!"})
+    #         serializer = CharityLocationSerializer(charity)
+    #         return Response(serializer.data)
+    #     except Exception as error:
+    #         return Response({"errors": str(error)})
+
+    # def post(self, request, charity_id,format=None):
+    #     try:
+    #         serializer = CharityLocationSerializer(data=request.data,context={'request': request})
+    #         if serializer.is_valid():
+    #             serializer.save()
+    #             return Response(serializer.data)
+    #         return Response(serializer.errors)
+    #     except Exception as error:
+    #         return Response({"errors": str(error)})
