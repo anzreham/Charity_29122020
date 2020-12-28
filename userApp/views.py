@@ -83,8 +83,8 @@ class ClientDetails(APIView):
                  return Response({"errors": "You are not authorized to view this page!"})
             serializer = ClientProfileSerializer(client)
             return Response(serializer.data)
-        except:
-            return Response({"errors": "You are not authorized to view this page!"})
+        except Exception as error:
+            return Response({"errors": str(error)})     
 
 class CharityDetails(APIView):
     queryset = User.objects.all()
@@ -98,5 +98,5 @@ class CharityDetails(APIView):
                 return Response({"errors": "You are not authorized to view this page!"})
             serializer =CharityProfileSerializer(charity)
             return Response(serializer.data)
-        except:
-            return Response({"errors": "You are not authorized to view this page!"})        
+        except Exception as error:
+            return Response({"errors": str(error)})        

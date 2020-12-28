@@ -1,5 +1,6 @@
 from django.db import models
-from userApp.models import Charity
+from userApp.models import User
+from django.conf import settings
 
 class Category(models.Model):
     name        = models.CharField(max_length=40)
@@ -16,7 +17,7 @@ class CharityLocation(models.Model):
     latitude    = models.CharField(max_length=120)
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now=True)
-    # charity = models.OneToOneField("Charity", on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    def __repr__(self):
-        return f'<Charity Location: ID:{self.id} Longitude:{self.longitude} Latitude:{self.latitud} Charity ID:{self.charity_id}>'
+    def __str__(self):
+        return f'<Charity Location: ID:{self.id} Longitude:{self.longitude} Latitude:{self.latitude} Charity ID:{self.charity_id}>'

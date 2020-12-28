@@ -8,19 +8,19 @@ from .submodels.UserAddress import UserAddress
 from userApp.serializers import UserSerializer
 
 class UserAddressSerializer(serializers.ModelSerializer):
-    creator = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = UserAddress
-        fields = ('id', 'address_1', 'address_2','city','post','country','created_at','creator', 'updated_at')
+        fields = ('id', 'address_1', 'address_2','city','post','country','created_at','user', 'updated_at')
     def create(self, validated_data):
-        creator = validated_data['creator']
-        creator.save()
+        user = validated_data['user']
+        user.save()
         address_1=validated_data['address_1']
         address_2=validated_data['address_2']
         city=validated_data['city']
         post=validated_data['post']
         country=validated_data['country'] 
-        address = UserAddress.objects.create(address_1=address_1,address_2=address_2,city=city,post=post,country=country,creator=creator) 
+        address = UserAddress.objects.create(address_1=address_1,address_2=address_2,city=city,post=post,country=country,user=user) 
         return address
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -32,11 +32,20 @@ class CharitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Charity
         fields = ['id', 'name','description','email','phone_number','license_file','password','created_at','updated_at','belong_category']
-
+        
 class CharityLocationSerializer(serializers.ModelSerializer):
+    charity = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = CharityLocation
-        fields = ['id', 'longitude','latitude','created_at','updated_at','charity']
+        fields = ('id', 'longitude','latitude','created_at','updated_at','charity')
+    def create(self, validated_data):
+        charity = validated_data['charity']
+        charity.save()
+        longitude=validated_data['longitude']
+        latitude=validated_data['latitude']
+        address = CharityLocation.objects.create(longitude=longitude,latitude=latitude,charity=charity) 
+        return address
+
 
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:

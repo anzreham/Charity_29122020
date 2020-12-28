@@ -40,6 +40,7 @@ urlpatterns = [
     path(r'api/sessions', user_views.UserSessions.as_view()),
     path(r'api/client/<int:client_id>/', user_views.ClientDetails.as_view()),
     path(r'api/charity/<int:charity_id>/', user_views.CharityDetails.as_view()),
-    path(r'api/client/<int:client_id>/location/', views.UserAddressViewSet.as_view())
+    path(r'api/client/<int:client_id>/location/', views.UserAddressViewSet.as_view()),
+    path(r'api/charity/<int:charity_id>/location/', views.CharityLocationViewSet.as_view())
 
 ]
