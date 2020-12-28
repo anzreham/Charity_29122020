@@ -1,6 +1,6 @@
 from django.db import models
-from .User import User
-from .Charity import Charity
+from userApp.models import User,Charity
+ 
  
 class Activity(models.Model):
     name           = models.CharField(max_length=120)

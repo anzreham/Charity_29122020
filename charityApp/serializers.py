@@ -1,14 +1,11 @@
 from rest_framework import serializers
 from .submodels.News import News
-from .submodels.User import User, UserAddress
+from userApp.models import User, Charity
 from .submodels.Appointment import BookAppointment
 from .submodels.Activity import Activity, Volunteering
-from .submodels.Charity import Charity,CharityLocation,Category
+from .submodels.Charity import CharityLocation,Category
+from .submodels.UserAddress import UserAddress
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'first_name', 'last_name','email','phone_number','gender','password','created_at', 'updated_at']
 
 class UserAddressSerializer(serializers.ModelSerializer):
     class Meta:

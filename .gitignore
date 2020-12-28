@@ -1,3 +1,4 @@
 env_charity/
 __pycache__/
 *.pyc
+.env

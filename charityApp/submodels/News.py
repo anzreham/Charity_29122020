@@ -1,5 +1,5 @@
 from django.db import models
-from .Charity import Charity
+from userApp.models  import Charity
 
 class News(models.Model):
     title      = models.CharField(max_length=120)

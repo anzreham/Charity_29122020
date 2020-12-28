@@ -13,24 +13,30 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
- 
-from django.urls import path,include
-from rest_framework import routers
+from django.contrib import admin
+from django.urls import path,include 
 from charityApp import views
+from userApp import views as user_views
+from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
-router = routers.DefaultRouter()
-router.register(r'user', views.UserViewSet)
-router.register(r'user/<int:id>', views.UserViewSet)
-router.register(r'user_location', views.UserAddressViewSet)
-router.register(r'charity', views.CharityViewSet)
-router.register(r'charity/<int:id>', views.CharityViewSet)
-router.register(r'charity_location', views.CharityLocationViewSet)
-router.register(r'category', views.CategoryViewSet)
-router.register(r'news', views.NewsViewSet)
-router.register(r'activities', views.ActivityViewSet)
-router.register(r'book_appointment', views.BookAppointmentViewSet)
-router.register(r'volunteering', views.VolunteeringViewSet)
+router = DefaultRouter()
+
+# router.register(r'user_location', views.UserAddressViewSet)
+# router.register(r'charity_location', views.CharityLocationViewSet)
+# router.register(r'category', views.CategoryViewSet)
+# router.register(r'news', views.NewsViewSet)
+# router.register(r'activities', views.ActivityViewSet)
+# router.register(r'book_appointment', views.BookAppointmentViewSet)
+# router.register(r'volunteering', views.VolunteeringViewSet)
 
 urlpatterns = [
+    # path('admin/', admin.site.urls),
     path(r'api/', include(router.urls)),
+    path(r'api/allusers', user_views.UserViewSet.as_view()),
+    path(r'api/clients',user_views.ClientViewSet.as_view()),  
+    path(r'api/charities',user_views.CharityViewSet.as_view()),  
+    path(r'api/sessions', user_views.UserSessions.as_view()),
+    path(r'api/client/<int:client_id>/', user_views.ClientDetails.as_view()),
+    path(r'api/charity/<int:charity_id>/', user_views.CharityDetails.as_view())
 ]

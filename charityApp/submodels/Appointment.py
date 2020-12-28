@@ -1,6 +1,6 @@
 from django.db import models
-from .User import User
-from .Charity import Charity, Category
+from userApp.models import User, Charity
+from .Charity import Category
  
 class BookAppointment(models.Model):
     size            = models.CharField(max_length = 40)
