@@ -10,3 +10,6 @@ class UserAddress(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     creator    = models.OneToOneField("userApp.User", on_delete=models.CASCADE)
+
+    def __repr__(self):
+        return f'<User Address: ID:{self.id} City:{self.city} Creator ID:{self.creator_id}>'

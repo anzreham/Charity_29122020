@@ -22,7 +22,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter()
 
-# router.register(r'user_location', views.UserAddressViewSet)
+
 # router.register(r'charity_location', views.CharityLocationViewSet)
 # router.register(r'category', views.CategoryViewSet)
 # router.register(r'news', views.NewsViewSet)
@@ -30,6 +30,7 @@ router = DefaultRouter()
 # router.register(r'book_appointment', views.BookAppointmentViewSet)
 # router.register(r'volunteering', views.VolunteeringViewSet)
 
+# router.register('client/<int:client_id>/location', views.UserAddressViewSet)
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path(r'api/', include(router.urls)),
@@ -38,5 +39,7 @@ urlpatterns = [
     path(r'api/charities',user_views.CharityViewSet.as_view()),  
     path(r'api/sessions', user_views.UserSessions.as_view()),
     path(r'api/client/<int:client_id>/', user_views.ClientDetails.as_view()),
-    path(r'api/charity/<int:charity_id>/', user_views.CharityDetails.as_view())
+    path(r'api/charity/<int:charity_id>/', user_views.CharityDetails.as_view()),
+    path(r'api/client/<int:client_id>/location/', views.UserAddressViewSet.as_view())
+
 ]

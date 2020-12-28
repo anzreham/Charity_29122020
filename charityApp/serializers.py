@@ -5,12 +5,23 @@ from .submodels.Appointment import BookAppointment
 from .submodels.Activity import Activity, Volunteering
 from .submodels.Charity import CharityLocation,Category
 from .submodels.UserAddress import UserAddress
-
+from userApp.serializers import UserSerializer
 
 class UserAddressSerializer(serializers.ModelSerializer):
+    creator = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = UserAddress
-        fields = ['id', 'address_1', 'address_2','city','post','country','user_id','created_at', 'updated_at']
+        fields = ('id', 'address_1', 'address_2','city','post','country','created_at','creator', 'updated_at')
+    def create(self, validated_data):
+        creator = validated_data['creator']
+        creator.save()
+        address_1=validated_data['address_1']
+        address_2=validated_data['address_2']
+        city=validated_data['city']
+        post=validated_data['post']
+        country=validated_data['country'] 
+        address = UserAddress.objects.create(address_1=address_1,address_2=address_2,city=city,post=post,country=country,creator=creator) 
+        return address
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
