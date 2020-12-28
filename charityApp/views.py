@@ -3,14 +3,14 @@ from django.shortcuts import HttpResponse, redirect ,render
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from userApp.models import User
+from userApp.models import User,Category
 from .submodels.News import News
 from .submodels.UserAddress import  UserAddress
 from .submodels.Appointment import BookAppointment
 from .submodels.Activity import Activity, Volunteering
-from .submodels.Charity import CharityLocation,Category
-from userApp.serializers import UserSerializer
-from .serializers import CategorySerializer,CharityLocationSerializer,NewsSerializer,UserAddressSerializer,BookAppointmentSerializer,ActivitySerializer,VolunteeringSerializer
+from .submodels.Charity import CharityLocation
+from userApp.serializers import UserSerializer, CategorySerializer
+from .serializers import CharityLocationSerializer,NewsSerializer,UserAddressSerializer,BookAppointmentSerializer,ActivitySerializer,VolunteeringSerializer
 
 class UserAddressViewSet(APIView):
     queryset = UserAddress.objects.all()
@@ -37,11 +37,6 @@ class UserAddressViewSet(APIView):
             return Response(serializer.errors)
         except Exception as error:
             return Response({"errors": str(error)})
-
-
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
 
 class NewsViewSet(APIView):
     queryset = News.objects.all()

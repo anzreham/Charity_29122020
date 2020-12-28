@@ -3,7 +3,7 @@ from .submodels.News import News
 from userApp.models import User, Charity
 from .submodels.Appointment import BookAppointment
 from .submodels.Activity import Activity, Volunteering
-from .submodels.Charity import CharityLocation,Category
+from .submodels.Charity import CharityLocation 
 from .submodels.UserAddress import UserAddress
 from userApp.serializers import UserSerializer
 
@@ -22,11 +22,6 @@ class UserAddressSerializer(serializers.ModelSerializer):
         country=validated_data['country'] 
         address = UserAddress.objects.create(address_1=address_1,address_2=address_2,city=city,post=post,country=country,user=user) 
         return address
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', 'name']
    
 class CharitySerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,10 +1,30 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .models import User, Client, Charity
+from .models import User, Client, Charity, Category
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate, login, logout
-from .serializers import UserSerializer, UserSessionSerializer, ClientProfileSerializer, CharityProfileSerializer
+from .serializers import CategorySerializer,UserSerializer, UserSessionSerializer, ClientProfileSerializer, CharityProfileSerializer
+
+class CategoryViewSet(APIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    def get(self, request, format=None):
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
+    def post(self, request, format=None):
+        try:
+            if request.user.is_superuser:
+                serializer = CategorySerializer(data=request.data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                return Response(serializer.errors)
+            return Response({"errors": "Not allowed"})
+        except Exception as error:
+            return Response({"errors": str(error)})
 
 class UserViewSet(APIView):
     queryset = User.objects.all()

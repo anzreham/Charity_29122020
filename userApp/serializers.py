@@ -1,8 +1,12 @@
 from rest_framework import serializers
-from .models import User , Client, Charity
+from .models import User , Client, Charity, Category
 from django.contrib.auth import password_validation
 from django.contrib.auth.hashers import make_password
  
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

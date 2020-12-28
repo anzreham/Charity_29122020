@@ -32,11 +32,12 @@ router = DefaultRouter()
 
 # router.register('client/<int:client_id>/location', views.UserAddressViewSet)
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path(r'api/', include(router.urls)),
     path(r'api/allusers', user_views.UserViewSet.as_view()),
     path(r'api/clients',user_views.ClientViewSet.as_view()),  
-    path(r'api/charities',user_views.CharityViewSet.as_view()),  
+    path(r'api/charities',user_views.CharityViewSet.as_view()), 
+    path(r'api/categories',user_views.CategoryViewSet.as_view()),  
     path(r'api/news',views.NewsViewSet.as_view()),
     path(r'api/news/<int:news_id>/',views.NewsDetails.as_view()),
     path(r'api/activites',views.ActivityViewSet.as_view()),

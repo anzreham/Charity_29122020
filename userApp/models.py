@@ -59,6 +59,14 @@ class Client(models.Model):
     def __repr__(self):
       return f'<User object: ID:{self.id} First Name:{self.first_name} Last Name:{self.last_name}>'
 
+class Category(models.Model):
+    name        = models.CharField(max_length=40)
+    created_at  = models.DateTimeField(auto_now_add=True) 
+    updated_at  = models.DateTimeField(auto_now=True)
+    
+    def __repr__(self):
+        return f'<Category object: ID:{self.id} name:{self.name}>'
+        
 class Charity(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name            = models.CharField(max_length=40)
@@ -67,7 +75,7 @@ class Charity(models.Model):
     license_file    = models.TextField()
     created_at      = models.DateTimeField(auto_now_add=True)
     updated_at      = models.DateTimeField(auto_now=True)
-    # belong_category = models.ForeignKey(Category, related_name='charities_in_group', on_delete=models.CASCADE) 
+    category = models.ForeignKey(Category, related_name='charities_in_group', on_delete=models.CASCADE,null=True) 
 
     def __repr__(self):
         return f'<Charity object: ID:{self.id} Name:{self.name} >'
