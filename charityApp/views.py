@@ -43,6 +43,40 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+class NewsViewSet(APIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+    def get(self, request, format=None):
+        news = News.objects.all()
+        serializer = NewsSerializer(news, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        try:
+            check=User.objects.get(id=request.user.id)
+            if check.is_charity:
+                serializer = NewsSerializer(data=request.data,context={'request': request})
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                return Response(serializer.errors)
+            return Response({"errors": "Not allowed"})
+        except Exception as error:
+            return Response({"errors": str(error)})
+ 
+class NewsDetails(APIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+    def get(self, request, news_id, format=None):
+        try:
+            news=News.objects.get(id=news_id)
+            serializer = NewsSerializer(news)
+            return Response(serializer.data)
+        except Exception as error:
+            return Response({"errors": str(error)})     
+    
 class CharityLocationViewSet(APIView):
     queryset = CharityLocation.objects.all()
     serializer_class = CharityLocationSerializer
@@ -67,10 +101,6 @@ class CharityLocationViewSet(APIView):
             return Response(serializer.errors)
         except Exception as error:
             return Response({"errors": str(error)})
-
-class NewsViewSet(viewsets.ModelViewSet):
-    queryset = News.objects.all()
-    serializer_class = NewsSerializer
 
 class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()

@@ -48,9 +48,17 @@ class CharityLocationSerializer(serializers.ModelSerializer):
 
 
 class NewsSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = News
-        fields = ['id', 'title','content','created_at','updated_at','charity_id']  
+        fields = ('id', 'title','content','created_at','updated_at','user') 
+    def create(self, validated_data):
+        user = validated_data['user']
+        user.save()
+        title=validated_data['title']
+        content=validated_data['content']
+        news = News.objects.create(title=title,content=content,user=user) 
+        return news
 
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
