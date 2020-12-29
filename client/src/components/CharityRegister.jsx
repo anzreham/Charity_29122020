@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
+import { Link, navigate } from '@reach/router';
 
 const CharityRegister = (props) => {
-    const [name, setName]            = useState("")    
-    const [email, setEmail]          = useState("")        
-    const [phone_number, setPhone]   = useState("")     
-    const [license_file, setLicense] = useState("")     
-    const [password, setPassword]    = useState("")       
+    // const [user, setuser]            = useState({});
+    const [name, setName]            = useState("");  
+    const [email, setEmail]          = useState("");       
+    const [phone_number, setPhone]   = useState("");    
+    const [license_file, setLicense] = useState("");     
+    const [password, setPassword]    = useState("");       
     const [belong_category, setCategory]    = useState("")  
     const [all_categories, setAllCategory]  = useState([]) 
 
@@ -20,17 +22,21 @@ const CharityRegister = (props) => {
         .then((res) => {
           console.log(res.data);
           setAllCategory(res.data)
+
         })
         .catch((err) => console.error(err));
     }
      
   	const handleSubmitCharity = (e) => {
       e.preventDefault();
-      const addCharity={ name, email, phone_number, license_file, password, belong_category}
+      const addCharity={ "user": {"email":email,"phone_number":phone_number,"password":password } ,"logo":"logo", "name":name,"license_file": license_file}
+      
       axios
-        .post('http://localhost:7000/api/charity/?format=json', addCharity)
+        .post('http://localhost:7000/api/charities?format=json', addCharity)
         .then((res) => {
             console.log(addCharity)
+            navigate("/charity-dashboard");
+
           } )
         .catch((err) => console.error(err));
     };
@@ -77,6 +83,10 @@ const CharityRegister = (props) => {
 };
 
 export default CharityRegister;
+
+
+
+
 
 
 

@@ -41,19 +41,21 @@ class CharityProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Charity
-        fields=( 'id','user','name','description','logo','license_file','category')
+        fields=( 'id','user','name','logo','license_file')
     
     def create(self, validated_data):
         user_data = validated_data['user'] 
         get_user=User.objects.create(is_charity =True ,**user_data)
         get_user.set_password(user_data['password'])
         get_user.save()
+
         name=validated_data['name']
-        description=validated_data['description']
+        # description=validated_data['description']
         logo=validated_data['logo']
         license_file=validated_data['license_file']
-        category=validated_data['category']
-        charity = Charity.objects.create(user=get_user ,name=name, description=description,logo=logo,license_file=license_file,category=category) 
+        # category=validated_data['category']
+        print("Charity info", name, logo )
+        charity = Charity.objects.create(user=get_user ,name=name, logo=logo,license_file=license_file) 
         return charity
  
 

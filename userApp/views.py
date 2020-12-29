@@ -83,6 +83,8 @@ class UserSessions(APIView):
             if user == None:
                 return Response({"errors": "Invalid login attempt, wrong combination", "user": None})
             login(request, user)
+
+
             return Response(UserSessionSerializer(user).data)
         except User.DoesNotExist as error: #handle does not exist error(server break)
             return Response({"errors": "Invalid login attempt, does not exist", "user": None})

@@ -9,16 +9,18 @@ const UserRegister = () => {
     const [gender, setGender]         = useState("Female")     
     const [password, setPassword]     = useState("")  
  
-  	const handleSubmitUser = (e) => {
-      e.preventDefault();
-      const addUser={ first_name, last_name, email, phone_number, gender, password}
-      axios
-        .post('http://localhost:7000/api/user/?format=json', addUser)
-        .then((res) => {
-            console.log(addUser)
-          } )
-        .catch((err) => console.error(err));
-    };
+    const handleSubmitUser = (e) => {
+        e.preventDefault();
+      //   const addUser={ first_name, last_name, email, phone_number, gender, password}
+        const addUser={ "user": {"email":email,"phone_number":phone_number,"password":password } ,"first_name":first_name, "last_name":last_name,"gender": gender}
+  
+        axios
+          .post('http://localhost:7000/api/clients?format=json', addUser)
+          .then((res) => {
+              console.log(addUser)
+            } )
+          .catch((err) => console.error(err));
+      };
 
     return (
         <div>

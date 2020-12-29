@@ -1,0 +1,66 @@
+
+
+#testing{
+  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 100px ;
+  /* box-shadow: 10px 10px 5px grey; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+ 
+} 
+  
+h1{
+    font-size: 4em;
+    font-weight: bold; 
+    color: darkslategray;
+    font-family: 'Archivo Black';
+}
+
+ 
+.formD{
+  height: 35%;
+  border: 5px solid #BED8D4;
+  border-radius: 20%;
+  margin-top: 1em;
+  /* text-align: center;
+  justify-content: center; */
+  flex-direction: column;
+  background-color:#F7F9F9;
+  display: flex;
+  padding: 45px;
+  width: 700px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.inputcontainer{
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+  }
+
+  /* nav {
+    background-color: #012615;
+     color: white
+	
+  }   */
+  .Dtbody{
+    	/* background-color: #ecf5f0; */
+	font-family: 'Century Gothic', Calibri, Arial;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-bottom: 50px;
+  }
+.navbar{
+  background-color: #012615;
+  color: "white";
+}
+  
+  
+  
+ 
