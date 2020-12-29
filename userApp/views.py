@@ -112,7 +112,7 @@ class CharityDetails(APIView):
 
     def get(self, request, charity_id, format=None):
         try:
-            charity=Charity.objects.filter(id=charity_id)
+            charity=Charity.objects.get(user_id=charity_id)
             current = request.user.id
             if current != charity.user_id:
                 return Response({"errors": "You are not authorized to view this page!"})

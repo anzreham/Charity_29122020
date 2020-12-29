@@ -82,9 +82,19 @@ class VolunteeringSerializer(serializers.ModelSerializer):
         return volunteer
           
 class  BookAppointmentSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model =  BookAppointment
-        fields = ['id', 'size','amount','date','time','user','charity','category','created_at','updated_at','charity_id']      
-
-
-      
+        fields = ['id', 'size','amount','date','time','user','charity','category','created_at','updated_at']      
+    def create(self, validated_data):
+        user = validated_data['user']
+        user.save()
+        size=validated_data['size']
+        amount=validated_data['amount']
+        date=validated_data['date']
+        time=validated_data['time']
+        category=validated_data['category']
+        charity=validated_data['charity']
+        appt = BookAppointment.objects.create(size=size, amount=amount, date=date, time=time,category=category, user=user,charity=charity) 
+        return appt
+        
